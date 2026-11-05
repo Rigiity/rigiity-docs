@@ -1,0 +1,25 @@
+---
+title: "Java"
+description: "Recommended Java tooling stack."
+---
+
+The recommended Java stack leans on the compiler itself for the first line of analysis, and keeps the trust chain short by driving analyzer CLIs directly.
+
+## The stack
+
+- **Build: Gradle**, with the toolchain pinned to a modern JDK so every machine compiles with the same language version.
+- **Compile-time linting: Error Prone**, wired into javac as a compiler plugin. Every compile of main and test code lints automatically; there is no separate analysis step to forget.
+- **Bytecode analysis: SpotBugs**, driven via its official CLI jar straight from the build tool rather than through a third-party wrapper plugin. The wrapper-plugin route is convenient and costs an extra audited link in the trust chain; driving the CLI directly keeps the chain short.
+- **Tests: JUnit Jupiter**, with a BOM aligning JUnit versions across the project. Tests live in a source set parallel to main code.
+
+## The verification gate
+
+The gate mirrors the compile pipeline: compile (which lints via Error Prone), run SpotBugs, run the test suite. A single `check` task or script wires them in order, and CI runs it on every pull request.
+
+## Provenance
+
+Third-party licenses are generated into a committed license document by a script, regenerated whenever dependencies change. Hand-written entries appear only where the generator cannot reliably identify a license or a package declares one in a non-standard way.
+
+## Release builds
+
+Distribution artifacts are built for clarity of trust: a shaded jar for a single-file distribution, and per-platform packages that bundle a pinned runtime so users get the exact JVM the software was tested with, with no system Java dependency.

@@ -1,0 +1,55 @@
+---
+title: "Deployment Safety"
+description: "How changes reach production at Rigiity."
+---
+
+We deploy deliberately. Continuous deployment is not used: a push never reaches production on its own. Automated checks run continuously, but a human always ships.
+
+## The rules
+
+- **CI verifies, humans deploy.** Automation runs continuously and its results inform the decision to release, but it never triggers one. What runs in our pipelines follows the same trust rule as everything else we use:
+  - Our own workflows and code are always acceptable.
+  - A prominent, widely used third-party action or package is acceptable only when we have audited it as safe and pinned it to an exact version we reviewed. Pinned means it cannot silently change under us; audited means someone actually read what it does.
+  - Anything that fails those two tests does not run in our pipelines.
+- **Deployments are manual and deliberate**, performed by someone authorized for the target system.
+- **Every release artifact is signed** where possible, so what we publish is verifiable against what we built.
+- **If a deployment can fail harmlessly, it is not ready.** Error states must be descriptive enough that a user can resolve them without trial-and-error searching.
+
+### Why we sign on the deployer's machine
+
+Signing locally is a deliberate choice, and the reasoning matters more than the habit:
+
+- **CI-held signing keys are the more common real-world failure.** Signing from CI means the key lives as a secret in the automation system, and leaked CI secrets are among the most frequent real-world supply-chain incidents: compromised workflows, exposed tokens, and malicious pull requests exfiltrating credentials (the well-documented `pull_request_target` pattern, demonstrated repeatedly in security research and in real incidents at major projects). Our deployment model exists because we don't give automated infrastructure production authority; storing the signing key there would quietly hand that authority back.
+- **Our threat model is the opposite of the one CI signing defends against.** CI signing suits orgs with many contributors and fast release velocity, where the risk is a compromised account pushing a malicious release. We have few people, deliberate releases, and the deployer is already the most trusted environment in the process. For us, the passphrase-protected key on a hardened personal machine (per the [device security rules](/handbook/tech-protocols/security-guidelines#device-security)) is the stronger link, and the CI runner is the shared one.
+- **The tradeoff is known and revisited at scale.** If the org ever grows to many deployers or outside merge access, hardware-backed keys or keyless signing become the right upgrade. The principle (a human deliberately signs what they ship) doesn't change; the mechanism improves.
+
+## Procedure
+
+The same shape applies to every system, with the specifics filled in per project:
+
+### Before deploying
+
+- The verification gate is green: lint, static analysis, and the full test suite pass on the exact code being deployed, not on something close to it.
+- For full-rigor projects: the [mutation spot checks](/handbook/tech-protocols/coding-standards/testing#mutation-spot-checks) have run over the critical modules.
+- The release is signed: artifacts are signed where possible, and the signing happens on the deployer's machine, from a clean checkout or a built artifact whose hash is recorded.
+- Release notes describe what changed and why, and they never precede green tests.
+- A rollback path exists and is understood before the deploy starts. Deploying without a known way back is how one-way doors get built.
+
+### The deploy itself
+
+- Performed by someone authorized for the target system, deliberately, with the deploy command or action run by hand.
+- One change set at a time. Bundling several unrelated changes into a single deploy means a rollback can't undo one without undoing all.
+- The per-system specifics (commands, targets, order of operations) live in that system's or software's own documentation, its repository, or both, wherever they are most useful to the person deploying.
+
+### After deploying
+
+- Verify the deployment actually works: run the smoke checks against the live system, not against the build machine's optimism.
+- Watch for the failure modes the change could plausibly cause; the deploy isn't "done" when the command exits, it's done when the system has been observed working.
+- Record the deploy: what was deployed, when, by whom, from what commit.
+
+## Rollback
+
+- **Anyone can call for a rollback.** The person who notices a problem doesn't need permission to say so; authority over *whether* to roll back belongs to the maintainer or management, but the alarm is always welcome.
+- **Rolling back is the process working.** A fast rollback followed by a calm investigation is the system behaving correctly; hesitation to roll back "because we already shipped it" is how small incidents become big ones.
+- **The rollback is rehearsed on paper**: the previous artifact, the command or action that restores it, and the data considerations (whether rolling back loses anything the new version created) are known before the deploy, per the procedure above.
+- **Every rollback is followed by a written post-mortem**: what failed, why the tests didn't catch it, and what changes so the next deploy is safer. Blame is not part of it; the post-mortem exists to fix the pipeline, not the person.

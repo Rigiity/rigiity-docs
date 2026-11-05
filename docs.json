@@ -1,0 +1,105 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Rigiity Docs",
+  "theme": "mint",
+  "colors": {
+    "primary": "#ff5100",
+    "light": "#ffa400",
+    "dark": "#ff0300"
+  },
+  "favicon": "/rigiity_square.svg",
+  "logo": {
+    "light": "/rigiity.svg",
+    "dark": "/rigiity_white.svg",
+    "href": "/"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Organization Handbook",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "Welcome & Onboarding",
+            "root": "handbook/welcome/overview",
+            "pages": [
+              "handbook/welcome/account-setup",
+              "handbook/welcome/communication-rules"
+            ]
+          },
+          {
+            "group": "Tech Protocols",
+            "root": "handbook/tech-protocols/overview",
+            "pages": [
+              {
+                "group": "Coding Standards",
+                "root": "handbook/tech-protocols/coding-standards/overview",
+                "pages": [
+                  "handbook/tech-protocols/coding-standards/writing-code",
+                  "handbook/tech-protocols/coding-standards/testing",
+                  "handbook/tech-protocols/coding-standards/review",
+                  "handbook/tech-protocols/coding-standards/force-multipliers"
+                ]
+              },
+              "handbook/tech-protocols/server-access",
+              "handbook/tech-protocols/deployment-safety",
+              "handbook/tech-protocols/security-guidelines"
+            ]
+          },
+          {
+            "group": "Operational Procedures",
+            "root": "handbook/operational/overview",
+            "pages": [
+              "handbook/operational/proposing-a-project",
+              "handbook/operational/requesting-resources",
+              "handbook/operational/task-workflow"
+            ]
+          },
+          {
+            "group": "Offboarding",
+            "root": "handbook/offboarding/overview",
+            "pages": [
+              "handbook/offboarding/archiving-projects",
+              "handbook/offboarding/access-removal"
+            ]
+          },
+          {
+            "group": "Legal & Licensing",
+            "root": "handbook/legal/overview",
+            "pages": [
+              "handbook/legal/licensing-of-our-work",
+              "handbook/legal/enforcement-stance",
+              "handbook/legal/mentioning-other-companies"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Products",
+        "icon": "cube",
+        "pages": [
+          "products/index"
+        ],
+        "groups": []
+      },
+      {
+        "tab": "Guides & Tutorials",
+        "icon": "graduation-cap",
+        "pages": [
+          "guides/index"
+        ],
+        "groups": [
+          {
+            "group": "Tooling Recommendations",
+            "root": "guides/tooling/overview",
+            "pages": [
+              "guides/tooling/python",
+              "guides/tooling/java",
+              "guides/tooling/other-languages"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

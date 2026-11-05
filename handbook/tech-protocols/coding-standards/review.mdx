@@ -1,0 +1,27 @@
+---
+title: "Review"
+description: "How code changes are reviewed and merged."
+---
+
+Code changes are reviewed before they land. Automated checks and thorough manual review work together on every merge; neither is trusted alone, because automated checks catch the mechanical and humans catch the conceptual.
+
+## Automated checks (CI)
+
+- CI runs on every pull request, using our own workflows and code, or prominent third-party actions that have been [audited and pinned](/handbook/tech-protocols/security-guidelines#evaluating-new-dependencies-and-tools) to an exact version.
+- A change merges only when CI passes. Red CI is a stop sign, never a footnote.
+- Codebase formatting is recommended, so diffs stay about substance instead of style.
+- Static analysis and unit/integration tests are required in CI where the code can be reliably tested. Code that resists reliable testing (hardware-dependent paths, GUI behavior, throwaway prototypes) is exempt, deliberately: forcing fake tests on untestable code produces the rotten green tests we ban.
+- The concrete checks per project type follow the [tooling recommendations](/guides/tooling/overview) for the language in use.
+
+## Manual review
+
+- Every change gets at least one human review before merge, from someone other than the author.
+- Reviewers check what automation can't: whether the design is right, whether the change does what it claims, whether error handling matches our standards, and whether the change makes the codebase better or just different.
+- Review comments are about the code, not the person. Criticism of a diff is welcome; that's the job.
+- For [full-rigor projects](/handbook/operational/task-workflow#process-scales-with-criticality), the review bar is higher: the reviewer should be able to reconstruct the why of the change from the task, the commit messages, and the diff alone.
+
+## Commits
+
+- Commits are signed, always. Unsigned commits don't merge. SSH and GPG keys are the methods we recommend; other industry-standard signing methods (such as X.509/S-MIME or Sigstore) are equally acceptable.
+- Commit messages are imperative, single-sentence where possible, and explain why when the why isn't obvious from the diff.
+- In full-rigor projects, commits are logical units: each one builds and makes sense on its own. Lightweight projects can be more relaxed.

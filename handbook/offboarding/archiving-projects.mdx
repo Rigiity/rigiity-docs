@@ -1,0 +1,31 @@
+---
+title: "Archiving Projects"
+description: "How inactive projects are archived and preserved."
+---
+
+A project that is no longer active should not linger in a half-maintained state. Archiving makes its status honest: preserved, findable, and no longer consuming attention.
+
+## When to archive
+
+- The maintainer or management decides a project is done, superseded, or no longer worth continuing.
+- A project that has been inactive long enough that its state is effectively "abandoned" gets archived rather than left to drift; the exact period is the maintainer's judgment, not a calendar rule, because a slow volunteer project being slowly worked is not the same as a dead one.
+- Completion is the happiest trigger: a finished project gets archived with pride, not quietly.
+
+## The procedure
+
+1. Decide and record the final state: is the last release the final one, or does the project deserve a final release that closes loose ends? Ship it if so; archiving a project that needed one more release is how "archived" becomes "died mid-sentence."
+2. Update the project's README and documentation to state its archived status, where its final release lives, and what (if anything) supersedes it.
+3. Archive the repository on its hosting platform (GitHub's archive feature, or the equivalent wherever the project lives): read-only, fully visible, nothing deleted.
+4. Update links and references elsewhere (the docs site, other projects' documentation) so nothing points at a project without saying it's archived.
+5. Record where the project's artifacts live: final release, signing keys records, documentation.
+
+## Preservation
+
+Archived means preserved, not deleted. What must survive:
+
+- The source code and full history.
+- The final release artifacts, and the record of how they were signed.
+- The documentation, including its archived status.
+- Any data the project holds that users depend on, with a stated plan for it (exported, migrated, or explicitly sunset).
+
+The rule underneath: someone who finds an archived Rigiity project five years later should be able to understand what it was, get its final version, and verify it. That's the reliability promise applied to our own past.

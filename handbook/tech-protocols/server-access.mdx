@@ -1,0 +1,28 @@
+---
+title: "Server Access"
+description: "How access to Rigiity systems is granted, governed, and revoked."
+---
+
+This page documents how access to our infrastructure is governed. It describes the policy: who approves access, how access is granted, and how access ends. Infrastructure specifics such as hostnames, addresses, and network layout are deliberately kept out of this public handbook and live in our internal records.
+
+## Principles
+
+- Least privilege by default. A volunteer gets exactly the access their work requires, and nothing more.
+- Every access grant has an owner who approved it, so there is never access without accountability.
+- Multi-factor authentication is required for anyone with access to our organization and admin accounts.
+
+## Requesting access
+
+Access is requested through [Requesting Resources](/handbook/operational/requesting-resources). A request states what is needed, why, and for how long.
+
+## Issuing access
+
+1. **The request arrives with its justification.** A request states what access is needed, for what work, and for how long it's expected to matter. Requests without a work reason go back for one; "I might need it" is not a reason.
+2. **Management approves.** Management (or the maintainer who owns the system, where one exists) checks that the request matches agreed work and grants the minimum that does the job. The approver is recorded: every grant has a name behind it.
+3. **Access is granted through established permission systems.** Each person gets their own account or key, provisioned through the platform's own permission and invitation mechanisms, with keys generated and stored securely on the individual's own devices. Credentials are never shared between people; if a task seems to require that, the task is redesigned instead.
+4. **MFA is enrolled before access is used.** For anything touching organization or admin accounts, multi-factor authentication is set up first, per the [Security Guidelines](/handbook/tech-protocols/security-guidelines). Access to an unprotected account is a misconfiguration, not a convenience.
+5. **The grant is recorded where the work lives**, per [Requesting Resources](/handbook/operational/requesting-resources): what was granted, by whom, and why, as a comment on the task or proposal.
+
+## Review and revocation
+
+Access is reviewed when its context changes rather than on a fixed calendar: when the work it was granted for completes, when the volunteer's focus moves elsewhere, or when a project winds down. The [Access Removal](/handbook/offboarding/access-removal) procedure covers departures. The review question is always the same: is this access still doing the job it was granted for?

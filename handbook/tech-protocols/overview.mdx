@@ -1,0 +1,21 @@
+---
+title: "Tech Protocols"
+description: "The standards and safety rules for everything we build and run."
+---
+
+This section defines how Rigiity builds software and operates infrastructure. These protocols exist because reliability is our name and our promise: a rigid structure holds its shape under pressure, and our engineering has to do the same.
+
+The pages in this section are written for people who already work in software: they assume familiarity with version control, testing, and general development practice, and they don't stop to explain those basics. If a term is unfamiliar, that's what search engines are for; everything here is written to be findable.
+
+The principles behind these pages are on [our website](https://rigiity.com): understand the problem, use a minimal core, refine deliberately. The pages here turn those principles into concrete rules.
+
+- [Coding Standards](/handbook/tech-protocols/coding-standards/overview): how code is written and reviewed.
+- [Server Access](/handbook/tech-protocols/server-access): who can reach our systems and how access is governed.
+- [Deployment Safety](/handbook/tech-protocols/deployment-safety): how changes reach production.
+- [Security Guidelines](/handbook/tech-protocols/security-guidelines): account security, signing, and reporting.
+
+## Platforms
+
+Development and testing primarily happen on Linux and Unix-like systems; that is where our software is built, run, and verified. Windows is welcome: we keep select Windows machines and VMs to test software on it for compatibility, and contributions from Windows users are welcome. But Windows is not our primary testing target, and contributors working from Windows should expect to verify their work against a Linux environment where the difference matters.
+
+macOS support is best-effort. Apple hardware is costly to run, macOS virtual machines are expensive to rent or not permitted on non-Apple hardware under Apple's EULA, and we don't think that cost is worth it for the coverage it buys. What we do instead: our test suites cover platform-sensitive details such as file path handling, which is where most macOS differences actually live. Beyond that, if our software happens to work on macOS, great; we just can't guarantee it, and we'd rather say so plainly than imply a testing level we don't perform.

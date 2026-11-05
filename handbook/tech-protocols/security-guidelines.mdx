@@ -1,0 +1,73 @@
+---
+title: "Security Guidelines"
+description: "Account security, signing, and how we handle vulnerability reports."
+---
+
+Security at Rigiity is documented publicly on [our security page](https://rigiity.com/security/), which is the single source of truth for vulnerability reporting and scope. This page covers the day-to-day security duties of volunteers.
+
+## Account security
+
+- Multi-factor authentication is required for anyone with access to our organization and admin accounts. No exceptions.
+- Use strong, unique passphrases. A password manager is the expected tool for this.
+- Report suspected compromise immediately to management, even if you are not sure. A false alarm costs minutes; a silent breach costs everything.
+
+## Device security
+
+Development machines hold sensitive material: credentials, signing keys, source code, and private communications. Protect the machine, and everything on it inherits the protection.
+
+- **Encrypt the home folder** on supported systems, or better, enable full-disk encryption where the system supports it properly. Full-disk encryption also covers swap and system caches, and on modern hardware the performance cost is negligible. Where enabling it requires a system reinstall, do it as part of machine setup rather than retrofitting later.
+- **Lock the screen** when stepping away, even at home. Session theft is easier than password theft.
+- **Keep the operating system and tools updated.** Updates are the cheapest security work that exists.
+
+## Secrets
+
+- We strongly recommend keeping secrets at rest inside an additional encrypted layer, such as an encrypted archive or container, and extracting them only when needed rather than leaving them as plain files. This applies whatever the secret's lifetime: access tokens, recovery codes, credential files. It protects against scenarios a passphrase alone does not, such as a stolen laptop or malware reading your home directory, at the cost of some daily inconvenience. Inconvenient but secure is the trade we take.
+- **Credentials that can deploy, publish, or push are short-lived**, even when stored securely. Mint them when the work needs them, let them expire when the work is done, and never treat a long expiry date as a convenience. Storage protects a secret while it exists; a short lifetime protects by making it barely exist. Identity keys are the deliberate exception: they live long and are protected by the passphrase-per-use gate instead.
+
+## Signing
+
+- Git commits are signed, always. SSH and GPG keys are the methods we recommend; other industry-standard signing methods (such as X.509/S-MIME or Sigstore) are equally acceptable. Keys are protected by passphrases.
+- Signing keys may live directly on the machine when they are passphrase-protected per use, as the passphrase is re-entered for each signing operation.
+- Every contributor is responsible for keeping their own key safe.
+- Release artifacts are signed where possible.
+
+## Reporting vulnerabilities
+
+If you find a security issue in anything we run or ship, report it privately per [our security page](https://rigiity.com/security/): email [security@rigiity.com](mailto:security@rigiity.com) or use private vulnerability reporting on the GitHub repository. Do not post details publicly until we have investigated and fixed it.
+
+## Handling third-party software
+
+The same trust rule applies everywhere: our own code, or prominent software that has been audited and pinned to an exact version. Anything else is evaluated before it touches our systems. See [Deployment Safety](/handbook/tech-protocols/deployment-safety) for how this applies to pipelines.
+
+### Evaluating new dependencies and tools
+
+Every dependency is an audit obligation and an attack surface. Before any third-party software, package, library, or GitHub Action touches our systems or pipelines, it passes this checklist.
+
+**1. Prominence and maturity**
+
+- Is it widely used and maintained by a known team or organization?
+- Has the specific version we intend to use been public for at least 7 days? Freshly published releases get vetted by the community or yanked within days; we let that process happen before we touch a version. A version younger than 7 days is acceptable only when we have audited that exact release ourselves and are satisfied it is safe and not the product of a supply-chain compromise.
+
+**2. Audit**
+
+- What does it actually do? Read the source or documentation enough to answer that honestly.
+- What are its own dependencies? A small trusted core applies recursively.
+- Does it request more capability than its job requires (network access, broad permissions, post-install scripts)?
+- What do we know about its maintainers, and is the release history consistent with a legitimate project?
+
+**3. Pinning**
+
+- Pin to an exact version we have audited. No floating ranges, no `latest`, no auto-updating.
+- Upgrades are deliberate events: the new version gets its own audit before it lands.
+
+**4. License and provenance**
+
+- Confirm the license is compatible with how we will use and distribute it.
+- Confirm the artifact comes from the vendor's official channel (vendor site, official registry, signed release), not a mirror or copy.
+
+**5. Ongoing**
+
+- Record what was installed, at what version, and why, so any audit trail stays reconstructable.
+- Revisit the decision if the project changes hands, changes license, or goes quiet.
+
+The short version: our own code is always acceptable. Prominent third-party code is acceptable when we have audited it and pinned it to an exact version. Anything else does not run in our pipelines or on our systems.

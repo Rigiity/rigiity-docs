@@ -1,0 +1,20 @@
+---
+title: "Tooling Recommendations"
+description: "Recommended stacks and the core ideas that apply to every language."
+---
+
+These pages recommend tooling stacks for the languages we work in, plus a generic page for everything else. They are recommendations, not mandates: a project may deviate when its context calls for it, with the why noted in the project itself.
+
+The core ideas are the same on every page, whatever the language:
+
+- **One command that verifies everything locally**: lint, static analysis, and tests in a single gate you run before pushing. If verification takes three memorized commands, it will eventually be skipped.
+- **Static analysis wired into the compile step** where the language allows it, so it cannot be skipped or forgotten.
+- **Dependencies pinned to exact versions** for anything sensitive, per the [dependency audit checklist](/handbook/tech-protocols/security-guidelines#evaluating-new-dependencies-and-tools).
+- **Generated provenance artifacts**: third-party license lists are produced by a script and committed, so they stay current and reviewable. Hand-writing entries is the exception, used only when tooling cannot reliably identify a license or a package does not declare one in a standard way; the same relaxed-exceptions rule we apply everywhere covers those cases. A full SBOM is a nice to have, not a dealbreaker: license compliance principles apply with or without one.
+- **Short trust chains**: when a build tool offers a third-party wrapper plugin around an analyzer, prefer driving the analyzer's official CLI directly. Every wrapper is another link that must be audited.
+
+## The stacks
+
+- [Python](/guides/tooling/python)
+- [Java](/guides/tooling/java)
+- [Other Languages](/guides/tooling/other-languages)

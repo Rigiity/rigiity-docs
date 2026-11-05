@@ -1,0 +1,28 @@
+Copyright (c) 2025-2026 Rigiity
+
+Licensing of this repository is split by content type:
+
+1. Text content
+
+All documentation text (the Organization Handbook, guides, product
+documentation, and other written content in Markdown/MDX files) is licensed
+under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+International License (CC BY-NC-SA 4.0).
+
+You are free to share and adapt this content with attribution to Rigiity,
+for non-commercial purposes, under the same license.
+
+Full license text: https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+2. Brand assets
+
+All logos, icons, and visual assets (including SVG files in the repository
+root and any images used by the documentation) are Copyright (c) Rigiity.
+All rights reserved. Nothing in this repository grants any license to copy,
+modify, distribute, or use these assets. They are included in the repository
+solely so the documentation site can display them.
+
+3. Contributions
+
+Contributions made through pull requests are licensed as part of the
+repository content under CC BY-NC-SA 4.0.

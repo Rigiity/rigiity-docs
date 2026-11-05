@@ -1,0 +1,31 @@
+---
+title: "Force multipliers"
+description: "How AI and LLM tools are used at Rigiity."
+---
+
+AI and LLM tools are force multipliers: they multiply the output of the person using them. We use them, we welcome them, and we hold them to the same standards as everything else we rely on.
+
+## The human owns the work
+
+The person who submits work is its author, whatever tools helped produce it. You must have read and understood everything you submit, be able to explain it in review, and be able to answer for its correctness. A signature on a commit is a human certification; no tool can sign, and delegating work to a tool never delegates responsibility for it.
+
+This is also why we don't require disclosure of AI assistance: a disclosure requirement is unenforceable (the kernel tried, and abandoned it after finding the tag carried no signal), and accountability doesn't actually depend on it. What depends on it is review: work that can't survive review doesn't merge, whatever produced it. Mentioning how AI was used is still welcome when a contributor wants to: it's not required, but it's genuinely helpful to reviewers and to anyone learning from the history, and no responsible person within Rigiity will think less of the work for it.
+
+## Where code and data may go
+
+The rule that actually matters for AI tools:
+
+- **Proprietary or unreleased code and data go only to endpoints with zero data retention or stricter guarantees** (such as trusted-execution-environment deployments), audited per the [dependency checklist](/handbook/tech-protocols/security-guidelines#evaluating-new-dependencies-and-tools) with the added question AI tools raise: where does input go, what is retained, what is it used for, and how much of that is verifiable rather than promised?
+- Public and open-source work has more freedom, but the same audit question still applies: pasting code into an unknown endpoint is adopting an unaudited dependency with your data as the payload.
+
+## Unacceptable uses
+
+- Submitting output you haven't read, understood, and verified.
+- Sending proprietary or confidential material to endpoints that don't meet the retention rule above.
+- Using a tool's output as an excuse: "the AI wrote it" explains nothing and excuses nothing.
+
+## Using them well
+
+Force multipliers multiply whatever you point them at, including mistakes. The difference between a multiplier and a liability is the quality of the questions you ask: the right questions activate the right behavior, and experienced engineers know the direct path to them. Vague prompts produce plausible output; precise questions about the problem, the constraints, and the failure modes produce work worth reviewing.
+
+Tests are the clearest example. LLMs write correct tests when guided well, and can even detect rotten tests, but their known failure mode is mirroring the implementation instead of the specification. So AI-written tests face a higher verification bar: they must pass [mutation spot checks](/handbook/tech-protocols/coding-standards/testing#mutation-spot-checks) and explicit manual review confirming they verify correct behavior.

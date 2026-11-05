@@ -1,0 +1,58 @@
+---
+title: "Task Workflow"
+description: "How tasks move through our Kanban boards."
+---
+
+Our boards are where work becomes visible. A task's column tells anyone, at a glance, exactly where it stands and what happens next.
+
+Where a project needs a board, we use [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) on public repositories. A Project can be viewed as a Kanban board, where columns are the values of the task's Status field. The default statuses are Todo, In Progress, and Done, and they can be customized per project (for example, adding In Review). Dragging a card to another column changes that field's value, and built-in workflows can move closed issues and merged pull requests to Done automatically. The same tasks are also visible as a table or roadmap, so the board is a view of the work, not a separate silo.
+
+Boards are used when the context calls for one, and not every project needs one. Small or short-lived work may live fine in issues alone.
+
+## Process scales with criticality
+
+The more a piece of work actually runs things, the more its tasks and commits must be able to stand alone: precise descriptions, logical commits, verifiable evidence. Process is evaluated by management or the project's maintainer, and anything running in production, or that others depend on, follows full rigor automatically. For everything else, the maintainer decides informally, and may declare a criticality level explicitly whenever they want the stricter rulebook.
+
+**Full rigor** applies to mission-critical work: anything running in production, anything people depend on, anything handling data or access.
+
+- One task, one coherent change.
+- Task descriptions and commit messages must be logical and complete on their own; a reviewer should reconstruct the why from them alone.
+- All lifecycle rules below apply, including verification evidence before Done.
+- The audit trail is part of the product.
+
+**Lightweight** applies to exploratory work, prototypes, internal tooling, and documentation fixes.
+
+- Bundling related small changes into one task or pull request is fine when separating them adds ceremony without value.
+- Task descriptions can be shorter, though a reader should still understand what happened and why.
+- Verification evidence is still required before Done, but it can be lighter: a manual check noted in the task rather than a formal test run.
+- Lifecycle rules about honesty of state still apply; they are not ceremony.
+
+**What never relaxes, at any level:**
+
+- Signed commits. That is identity and integrity, not process.
+- Done means verified.
+- Blocked tasks are labeled and explained, never silently stalled.
+- Moving backward through the board is normal and expected.
+
+## Board columns
+
+- **Backlog**: filed and described, not yet agreed to.
+- **Todo**: agreed, scoped small enough to start, unowned.
+- **In Progress**: someone is actively working it. A task has one accountable owner.
+- **In Review**: work is done, a pull request is open, awaiting review.
+- **Verification**: merged, being tested against the real thing.
+- **Done**: verified and closed. Kept as the literal name Done so GitHub's built-in automations keep working.
+
+## Task lifecycle
+
+1. A task must state what done looks like before it enters Todo. A task that cannot define its own completion is not ready to be worked.
+2. Nothing moves to In Progress without an assignee; nothing moves out of In Progress without either a pull request link (to In Review) or a comment explaining where it went.
+3. A task returning from Review or Verification to In Progress is the process working, not a failure.
+4. Verification evidence is required before Done: the test run, the deployed check, or the reproduced behavior, linked in the task.
+5. Blocked tasks stay in their column with a blocked label and a comment saying what they are waiting on.
+
+## Standards
+
+- Titles are imperative and specific: "Add retry logic to sync worker", not "Fix stuff".
+- A task is what one person can finish in a focused sitting or two. Larger work gets broken down or tracked as a parent task.
+- Every task links to its pull requests, and to the handbook section governing its work when one exists.

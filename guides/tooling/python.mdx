@@ -1,0 +1,28 @@
+---
+title: "Python"
+description: "Recommended Python tooling stack."
+---
+
+The recommended Python stack covers packaging, linting, type checking, and testing with four tools that are widely adopted, actively maintained, and each the prominent choice in its role.
+
+## The stack
+
+- **Packaging and environments: uv.** One tool for virtualenvs, dependency resolution, and builds, with a lockfile for reproducibility.
+- **Lint and format: ruff.** A single fast tool covering both jobs, configured in `pyproject.toml` alongside everything else.
+- **Static types: mypy.** Strict enough to catch real bugs, configured to warn on unused ignores and redundant casts so the type annotations stay honest.
+- **Tests: pytest**, with pytest-asyncio for async code. Test files live in a top-level `tests/` directory mirroring the source layout.
+
+## The verification gate
+
+The pattern worth copying in any Python project: a single `check` script that runs the whole gate in order:
+
+1. Verify every source file carries its license header.
+2. Lint with ruff.
+3. Type-check with mypy.
+4. Run the test suite.
+
+One command, exit code decides. CI runs the same gate on every pull request, and the author runs it locally before pushing.
+
+## Provenance
+
+Third-party licenses are generated into a committed license document by a script, regenerated whenever dependencies change. Hand-written entries appear only where the generator cannot reliably identify a license or a package declares one in a non-standard way.

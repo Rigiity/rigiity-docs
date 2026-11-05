@@ -1,0 +1,48 @@
+---
+title: "Proposing a Project"
+description: "How a new project idea becomes an official Rigiity project."
+---
+
+Anyone can propose a project. Proposals are evaluated against what Rigiity is for: human benefit, quality, and reliability, with a preference for offering things free.
+
+## Who proposes and who decides
+
+Proposals are a volunteer path: they exist so that anyone in the organization can pitch work they believe in. Management originates projects directly when it sees a need, and does not file proposals to itself.
+
+Management reviews every proposal and is responsible for approving or rejecting it.
+
+Proposals that touch work the public shouldn't know about yet go straight to management instead: by email, or in the internal chat. The public proposals repository is for everything else.
+
+## What a proposal must answer
+
+A proposal is filed as an issue in the proposals repository, using this structure:
+
+- **The problem**: what problem this solves, who has it, and how badly.
+- **Who benefits**: who this is for and how it helps them.
+- **Why Rigiity**: why Rigiity is the right builder for it, in terms of the mission (free, reliable, unconventional where it counts).
+- **Scope**: what is in, what is explicitly out, and what "done" looks like for a first release. A proposal must define a first release; an idea that cannot name its own first release is not yet a proposal.
+- **Criticality**: the proposed rigor level (full rigor or lightweight) with reasoning, per the [Task Workflow](/handbook/operational/task-workflow#process-scales-with-criticality). Production or dependency-facing work defaults to full rigor.
+- **Legal groundwork**: the proposed license and why, the rough dependency surface, and candidate names.
+- **Resources needed**: what the project needs from the organization, per [Requesting Resources](/handbook/operational/requesting-resources).
+- **Maintenance story**: who maintains it after release, and the expected ongoing load.
+
+## What management weighs
+
+- **Mission fit**: human benefit, quality, and a reason for Rigiity specifically to build it.
+- **Maintenance reality**: the maintenance story is where most proposals should be honestly evaluated. A project nobody can maintain after release creates ongoing cost without ongoing benefit, and that cost lands on the whole organization.
+- **Dependency surface**: whether the project can be built on a minimal, trusted core.
+- **Legal risk**: license compatibility and name conflicts.
+
+## How decisions are communicated
+
+The decision is posted as a comment on the proposal itself, stated plainly: approved, rejected, or approved with conditions. Rejection is not softened into ambiguity; a clear no with a reason is more respectful than a maybe that wastes the proposer's time. Rejected proposals stay visible in the repository, where they remain a record of what was considered and why.
+
+## Legal preparation stages
+
+Before a project starts, its legal groundwork is completed: license selection, license scanning of planned dependencies, and name research.
+
+- **License selection**: choosing the license the project will ship under, stated with a why in the proposal.
+- **License scanning**: checking the licenses of planned dependencies for compatibility. This continues through the project's life as dependencies change, but the initial scan happens before development starts.
+- **Name research**: searching for existing projects and products using the same or a confusingly similar name, checking name collisions on the platforms where the project will live, and confirming the name is workable before anything is published under it.
+
+The proposal starts this work; it does not require it to be finished. Requiring completed research before an idea can be pitched kills early ideas for no benefit. Approval means management agrees the idea is worth pursuing and the groundwork is on track.

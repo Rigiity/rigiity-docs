@@ -1,0 +1,26 @@
+---
+title: "Other Languages"
+description: "The core tooling ideas, translated to any language."
+---
+
+Every language we use or will use gets the same treatment as the named stacks, whatever its ecosystem calls the tools. This page is the generic translation of the [core ideas](/guides/tooling/overview).
+
+## What every project needs
+
+| Role | What it does | Usual shape |
+| ---- | ------------ | ----------- |
+| Formatter | One style, zero debate | The ecosystem's dominant formatter |
+| Linter | Catches mistakes and smells | The ecosystem's dominant linter, or the compiler's built-in lint |
+| Static analysis | Catches what linters miss | Type checker or deep analyzer, wired into the build if possible |
+| Test runner | Verifies behavior | The standard runner, in a parallel test tree |
+| Verification gate | Runs all of it in one command | A script or build task, wired into CI |
+| Dependency pinning | Reproducible, audited builds | Lockfile or exact pins for sensitive packages |
+| Provenance | Generated license lists | A script that regenerates them into a committed file |
+
+## Choosing tools when the page for your language does not exist yet
+
+Apply the [dependency audit checklist](/handbook/tech-protocols/security-guidelines#evaluating-new-dependencies-and-tools) to the candidates and pick the prominent, actively maintained one for each role. Two tools covering two roles beat one tool covering both badly; one tool covering both well beats two. When the ecosystem offers a wrapper plugin around an analyzer, prefer the analyzer's official CLI driven directly.
+
+## The gate is the product
+
+Whatever the language, the deliverable is the same: one command that verifies everything, run before every push and on every pull request. If a project's verification cannot be expressed as one command, the project does not yet meet the bar.

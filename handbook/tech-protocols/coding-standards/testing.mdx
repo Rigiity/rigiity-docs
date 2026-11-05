@@ -1,0 +1,35 @@
+---
+title: "Testing"
+description: "How testing works at Rigiity."
+---
+
+Tests exist to verify correct behavior, not to make numbers look good.
+
+## What we test
+
+- Tests verify correct behavior: given valid input, the right output; given invalid input, the right error, with a message helpful enough to act on.
+- A test that passes for the wrong reason is worse than no test. If a test would pass even when the code is broken, it's a rotten green test, and deleting it is better than keeping it.
+- Error paths are tested as seriously as happy paths. If a failure mode would confuse a user, there should be a test proving the failure is instead clear and descriptive.
+- "Reliably testable" is the bar for required tests, and it's an honest bar: if a test can't reliably verify behavior, we don't fake one; we cover it with manual verification instead.
+
+## Rotten tests
+
+A rotten green test is a test that passes while proving nothing: it would pass even if the code it claims to verify were broken. They grow quietly, through copy-pasted assertions, tests that mock away the behavior they claim to check, or assertions so loose they can't fail. A suite full of them is worse than an empty one, because it manufactures confidence while verifying nothing.
+
+The standing order: when a test is discovered to be rotten, it is deleted or rewritten to genuinely verify behavior. Keeping a rotten test to make coverage numbers look good is exactly the "verify correct behavior, not to make numbers look good" rule turned against itself.
+
+## Mutation spot checks
+
+Tests are verified by attacking them. Mutation testing makes small deliberate changes to the code (a flipped comparison, an off-by-one, a removed call) and checks whether any test fails. A mutant that survives means no test observes that change: a gap in the suite, or a rotten test in disguise.
+
+Mutation spot checks are part of the testing pipeline itself: wherever tests are required before a release, a mutation run over the critical modules accompanies them. Surviving mutants are investigated, not ignored: either the tests get stronger, or the mutant is dismissed as equivalent (a change no correct program can observe) with a reason recorded. Practical mutation tooling per language lives in the [tooling recommendations](/guides/tooling/overview) as it is chosen.
+
+## How tests are organized
+
+The concrete structure follows the [tooling recommendations](/guides/tooling/overview) for the language in use.
+
+## When tests run
+
+- Locally before pushing, by the author.
+- In CI on every pull request, and on the merge target.
+- For full-rigor projects: before every release, the full suite runs against the release candidate, and release notes never precede green tests.

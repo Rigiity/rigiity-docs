@@ -1,0 +1,15 @@
+/* SPDX-License-Identifier: CC-BY-NC-SA-4.0 */
+
+#navigation-items > ul.sidebar-group {
+  margin-top: 0.5rem;
+}
+
+#navigation-items > ul.sidebar-group:first-child {
+  margin-top: 0;
+}
+
+#navigation-items li > a,
+#navigation-items li > button {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
