@@ -15,7 +15,7 @@ Security at Rigiity is documented publicly on [our security page](https://rigiit
 
 Development machines hold sensitive material: credentials, signing keys, source code, and private communications. Protect the machine, and everything on it inherits the protection.
 
-- **Encrypt the home folder** on supported systems, or better, enable full-disk encryption where the system supports it properly. Full-disk encryption also covers swap and system caches, and on modern hardware the performance cost is negligible. Where enabling it requires a system reinstall, do it as part of machine setup rather than retrofitting later.
+- **Encrypt the home folder** on supported systems, or better, enable full-disk encryption where the system supports it properly. Full-disk encryption also covers swap and system caches, and on modern hardware the performance cost is negligible. Where enabling it requires a system reinstall, do it as part of machine setup rather than retrofitting later; on Linux, filesystem-native encryption such as fscrypt is the exception, encrypting the home folder on an existing install without reinstalling, at the cost of not covering swap and system paths the way full-disk encryption does.
 - **Lock the screen** when stepping away, even at home. Session theft is easier than password theft.
 - **Keep the operating system and tools updated.** Updates are the cheapest security work that exists.
 
