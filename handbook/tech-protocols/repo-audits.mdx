@@ -1,0 +1,33 @@
+---
+title: "Repository audits"
+description: "Checking existing repositories against current protocols and bringing them into compliance."
+---
+
+Standards evolve. A project that was compliant when it shipped can drift out of compliance as the protocols gain new rules, and an old project that nobody has touched in a year is the most likely place to find that drift. Audits exist to close that gap: checking an existing repository against the current protocols and bringing it into compliance.
+
+## When to audit
+
+- **When a protocol changes materially.** A new or changed standard triggers an audit of active projects it applies to; that's when drift is created, so that's when it's cheapest to catch.
+- **When a dormant project wakes up.** A project being resumed after a long pause gets audited before new work starts on it: you fix the foundation before building on it.
+- **Periodically for active older projects**, at the maintainer's judgment. There's no calendar mandate; the question is whether enough has changed (in the protocols or the project) that compliance is worth re-verifying.
+
+## What the audit checks
+
+The audit first establishes which protocols apply to the repository: the verification gate, tests, and CI are software protocols, and repositories that aren't software (documentation, assets, data) skip them unless they've opted in; signing, licensing, and provenance apply to everything.
+
+The audit then walks the project through the applicable protocols, in the same order the handbook presents them:
+
+- **Commits and history**: signed commits, message standards, merge proportionality.
+- **The verification gate**: does one command verify everything? Is it wired into CI where the project has CI?
+- **Dependencies**: pinned versions, the audit trail current, licenses scanned and compatible.
+- **Provenance**: license headers where applicable, NOTICE current, generated artifacts actually generated.
+- **Secrets and signing**: no standing credentials that shouldn't exist, keys protected per the guidelines.
+- **Error states**: failures are descriptive and actionable, per the quality standard.
+
+## What comes of it
+
+- **Compliant**: recorded as audited, with the date and the protocol version it was checked against. The project's README states its [criticality classification](/handbook/operational/task-workflow#process-scales-with-criticality) once evaluated, so the rigor level is visible to anyone who opens the repository.
+- **Drift found**: a compliance plan, prioritized by criticality (full-rigor projects fix first), tracked as tasks in the project.
+- **Not worth bringing forward**: if a dormant project fails the audit and nobody needs it anymore, that's an [archiving](/handbook/offboarding/archiving-projects) decision, not a repair project. The audit is also how projects honestly end.
+
+The audit's depth scales with the project's criticality, same as everything else: a full-rigor project gets the complete walk; a lightweight project gets the parts that apply to it.

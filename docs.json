@@ -43,7 +43,8 @@
               },
               "handbook/tech-protocols/server-access",
               "handbook/tech-protocols/deployment-safety",
-              "handbook/tech-protocols/security-guidelines"
+              "handbook/tech-protocols/security-guidelines",
+              "handbook/tech-protocols/repo-audits"
             ]
           },
           {
