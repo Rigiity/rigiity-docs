@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Rigiity Docs",
+  "name": "Rigiity",
   "theme": "mint",
   "colors": {
     "primary": "#ff5100",
@@ -102,5 +102,6 @@
         ]
       }
     ]
-  }
+  },
+  "description": "The documentation for Rigiity, the handbook, and tutorials."
 }
