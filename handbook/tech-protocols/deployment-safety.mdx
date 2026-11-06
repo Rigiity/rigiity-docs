@@ -3,15 +3,15 @@ title: "Deployment Safety"
 description: "How changes reach production at Rigiity."
 ---
 
-We deploy deliberately. Continuous deployment is not used: a push never reaches production on its own. Automated checks run continuously, but a human always ships.
+We deploy deliberately. Continuous deployment is not used for the majority of tasks: a push never reaches production on its own unless specifically configured and approved for the select scenario or project. Automated checks run continuously, but a human always ships unless non-critical or audited and approved.
 
 ## The rules
 
-- **CI verifies, humans deploy.** Automation runs continuously and its results inform the decision to release, but it never triggers one. What runs in our pipelines follows the same trust rule as everything else we use:
+- **CI verifies, humans deploy.** Automation runs continuously and its results inform the decision to release, but it generally never triggers one. What runs in our pipelines follows the same trust rule as everything else we use:
   - Our own workflows and code are always acceptable.
   - A prominent, widely used third-party action or package is acceptable only when we have audited it as safe and pinned it to an exact version we reviewed. Pinned means it cannot silently change under us; audited means someone actually read what it does.
   - Anything that fails those two tests does not run in our pipelines.
-- **Deployments are manual and deliberate**, performed by someone authorized for the target system.
+- **Deployments are manual and deliberate**, performed by someone authorized for the target system. Even some automatic deployments have a human in the loop for verification.
 - **Every release artifact is signed** where possible, so what we publish is verifiable against what we built.
 - **If a deployment can fail harmlessly, it is not ready.** Error states must be descriptive enough that a user can resolve them without trial-and-error searching.
 
@@ -43,7 +43,7 @@ The same shape applies to every system, with the specifics filled in per project
 
 ### After deploying
 
-- Verify the deployment actually works: run the smoke checks against the live system, not against the build machine's optimism.
+- Verify the deployment actually works: run the smoke checks against the live system or staging environment, not against the build machine's optimism.
 - Watch for the failure modes the change could plausibly cause; the deploy isn't "done" when the command exits, it's done when the system has been observed working.
 - Record the deploy: what was deployed, when, by whom, from what commit.
 
