@@ -2,6 +2,10 @@
 
 The documentation source for Rigiity: the Organization Handbook, product documentation, and guides. Built with [Mintlify](https://www.mintlify.com) and published at `docs.rigiity.com`.
 
+> **Criticality**: lightweight, documentation repository.
+> Applicable protocols: commits and signing, licensing and provenance, content quality.
+> The verification gate, tests, and CI do not apply (no software in this repository).
+
 ## Local preview
 
 This repo is developed with [Bun](https://bun.com). The Mintlify CLI is run through Bun with a pinned version, chosen per the release-age policy in the handbook's dependency audit checklist:
