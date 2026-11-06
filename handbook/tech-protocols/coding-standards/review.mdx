@@ -25,3 +25,4 @@ Code changes are reviewed before they land. Automated checks and thorough manual
 - Commits are signed, always. Unsigned commits don't merge. SSH and GPG keys are the methods we recommend; other industry-standard signing methods (such as X.509/S-MIME or Sigstore) are equally acceptable.
 - Commit messages are imperative, single-sentence where possible, and explain why when the why isn't obvious from the diff.
 - In full-rigor projects, commits are logical units: each one builds and makes sense on its own. Lightweight projects can be more relaxed.
+- Merges follow the same proportionality as everything else: fast-forward when it's routine alignment, and an explicit merge commit (`--no-ff`) reserved for big changes where the history should say that something happened. Ceremony scales with significance.
