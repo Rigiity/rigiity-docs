@@ -29,6 +29,7 @@ Development machines hold sensitive material: credentials, signing keys, source 
 
 - Git commits are signed, always. SSH and GPG keys are the methods we recommend; other industry-standard signing methods (such as X.509/S-MIME or Sigstore) are equally acceptable. Keys are protected by passphrases.
 - Signing keys may live directly on the machine when they are passphrase-protected per use, as the passphrase is re-entered for each signing operation.
+- Holding the passphrase in `ssh-agent` with a fixed lifetime (`ssh-add -t`, e.g. one to four hours for a work session) is an acceptable alternative: the key stays encrypted at rest, and the decrypted key exists in memory only for that window. Never enable agent forwarding to untrusted machines; a forwarded agent hands your loaded key to whoever controls the remote host.
 - Every contributor is responsible for keeping their own key safe.
 - Release artifacts are signed where possible.
 
